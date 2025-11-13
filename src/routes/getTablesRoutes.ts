@@ -3,6 +3,6 @@ import { getTableController } from "../controllers/getTablesControllers";
 
 const router = express.Router();
 
-router.get("/Tables", getTableController.getTables);
+router.get("/tables", getTableController.getTables);
 
 export default router;

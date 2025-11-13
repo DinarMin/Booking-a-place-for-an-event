@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { GetTablesRepository } from "../repositories/getTablesRepository";
-import { GetTablesService } from "../services/getTablesSerivce";
+import { GetTablesService } from "../services/getTablesService";
 
 const getTableRepo = new GetTablesRepository();
 const getTableService = new GetTablesService(getTableRepo);

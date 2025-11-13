@@ -5,6 +5,7 @@ export class GetTablesService {
   async getTables() {
     try {
       const result = await this.getTablesRepo.getTables();
+      return result;
     } catch (error) {
       throw error;
     }
