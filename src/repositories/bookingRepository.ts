@@ -1,12 +1,7 @@
-const pool = require("../db/postgres");
-
-type BookingParams = {
-  event_id: string;
-  user_id: string;
-};
-
-class BookingRepository {
-  async findBooking({ event_id, user_id }: BookingParams): Promise<boolean> {
+import pool from "../db/postgres";
+export class BookingRepository {
+  // Проверка, забронировал ли юзер это событие
+  async findBooking(event_id:string, user_id: string): Promise<boolean> {
     try {
       const result = await pool.query(
         "SELECT EXISTS * FROM bookings WHERE event_id=$1 AND user_id=$2",
@@ -17,8 +12,9 @@ class BookingRepository {
       throw error;
     }
   }
-
-  async createBooking({ event_id, user_id }: BookingParams) {
+  
+  async createBooking(event_id: string, user_id: string): Promise<void> {
+    // Создание записи о бронирование 
     try {
       const result = await pool.query(
         "INSERT INTO bookings(event_id, user_id) VALUES($1, $2) RETURNING *",
@@ -30,5 +26,3 @@ class BookingRepository {
     }
   }
 }
-
-module.exports = BookingRepository;
