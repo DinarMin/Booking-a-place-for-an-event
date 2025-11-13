@@ -12,17 +12,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const bookingRoutes_1 = __importDefault(require("./routes/bookingRoutes"));
-const eventRoutes_1 = __importDefault(require("./routes/eventRoutes"));
-const getTablesRoutes_1 = __importDefault(require("./routes/getTablesRoutes"));
-const postgres_1 = require("./db/postgres");
-const app = (0, express_1.default)();
-app.listen(3000, () => __awaiter(void 0, void 0, void 0, function* () {
-    yield (0, postgres_1.initDB)();
-    console.log(" Сервер запущен ");
-}));
-app.use(express_1.default.json());
-app.use("/api/bookings", bookingRoutes_1.default);
-app.use("/api/events", eventRoutes_1.default);
-app.use("/api/get", getTablesRoutes_1.default);
+exports.GetTablesRepository = void 0;
+const postgres_1 = __importDefault(require("../db/postgres"));
+class GetTablesRepository {
+    /* Вывод двух таблиц и их содержимое */
+    getTables() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const result = yield postgres_1.default.query("SELECT json_build_object( \
+        'events', (SELECT json_agg(e) FROM events e), \
+        'bookings', (SELECT json_agg(b) FROM bookings b) \
+        ) AS data;");
+                return result.rows[0];
+            }
+            catch (error) {
+                throw error;
+            }
+        });
+    }
+}
+exports.GetTablesRepository = GetTablesRepository;

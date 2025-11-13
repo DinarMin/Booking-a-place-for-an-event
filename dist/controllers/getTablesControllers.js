@@ -9,21 +9,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EventService = void 0;
-class EventService {
-    constructor(eventRepo) {
-        this.eventRepo = eventRepo;
-    }
-    /* Создание ивента (имя ивента и количество посадочных мест) */
-    createEvent(name, total_seats) {
+exports.getTableController = void 0;
+const getTablesRepository_1 = require("../repositories/getTablesRepository");
+const getTablesService_1 = require("../services/getTablesService");
+const getTableRepo = new getTablesRepository_1.GetTablesRepository();
+const getTableService = new getTablesService_1.GetTablesService(getTableRepo);
+class getTableController {
+    static getTables(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield this.eventRepo.createEvent(name, total_seats);
+                const result = yield getTableService.getTables();
+                res.status(200).json(result);
             }
             catch (error) {
-                throw error;
+                res.status(404).json(error);
             }
         });
     }
 }
-exports.EventService = EventService;
+exports.getTableController = getTableController;

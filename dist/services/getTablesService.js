@@ -9,16 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EventService = void 0;
-class EventService {
-    constructor(eventRepo) {
-        this.eventRepo = eventRepo;
+exports.GetTablesService = void 0;
+class GetTablesService {
+    constructor(getTablesRepo) {
+        this.getTablesRepo = getTablesRepo;
     }
-    /* Создание ивента (имя ивента и количество посадочных мест) */
-    createEvent(name, total_seats) {
+    getTables() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield this.eventRepo.createEvent(name, total_seats);
+                const result = yield this.getTablesRepo.getTables();
+                return result;
             }
             catch (error) {
                 throw error;
@@ -26,4 +26,4 @@ class EventService {
         });
     }
 }
-exports.EventService = EventService;
+exports.GetTablesService = GetTablesService;
