@@ -29,7 +29,7 @@ export class BookingService {
         event_id,
         user_id
       );
-      if (!isReservation) {
+      if (isReservation) {
         await client.query("ROLLBACK");
         throw new Error(
           "Нет возможности повторно забронировать одно и то-же событие"
