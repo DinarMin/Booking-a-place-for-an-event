@@ -1,4 +1,4 @@
-const pg = require("pg");
+import pg from "pg";
 
 const { Pool } = pg;
 
@@ -19,4 +19,4 @@ pool.on("error", () => {
   throw Error;
 });
 
-module.exports = pool;
+export default pool;
