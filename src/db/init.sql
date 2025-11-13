@@ -1,10 +1,10 @@
-CREATE TABLE events (
+CREATE TABLE IF NOT EXISTS events (
   id SERIAL PRIMARY KEY,
   name VARCHAR NOT NULL,
   total_seats INT NOT NULL
 );
 
-CREATE TABLE bookings (
+CREATE TABLE IF NOT EXISTS bookings (
   id SERIAL PRIMARY KEY,
   event_id INT REFERENCES events(id),
   user_id VARCHAR NOT NULL,
