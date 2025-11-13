@@ -4,7 +4,7 @@ export class BookingRepository {
   async findBooking(event_id:string, user_id: string): Promise<boolean> {
     try {
       const result = await pool.query(
-        "SELECT EXISTS * FROM bookings WHERE event_id=$1 AND user_id=$2",
+        "SELECT EXISTS (SELECT 1 FROM bookings WHERE event_id=$1 AND user_id=$2)",
         [event_id, user_id]
       );
       return result.rows[0].exists;
