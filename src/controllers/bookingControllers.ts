@@ -11,14 +11,18 @@ export class BookingController {
   static async reserve(req: Request, res: Response) {
     try {
       const { event_id, user_id } = req.body;
-
       if (!event_id || !user_id) {
-        res.status(400).json({ error: "Обязательные поля: event_id и user_id" });
+        res
+          .status(400)
+          .json({ error: "Обязательные поля: event_id и user_id" });
       }
 
       const booking = await bookingService.reservationSeat(event_id, user_id);
+      res.status(200).json(booking);
     } catch (error) {
-      res.status(404).json(error);
+      if(error instanceof Error) {
+        res.status(404).json({ message: error.message });
+      }
     }
-  }
+  } 
 }
