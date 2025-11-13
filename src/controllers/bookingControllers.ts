@@ -12,7 +12,7 @@ export class BookingController {
     try {
       const { event_id, user_id } = req.body;
 
-      if (event_id || user_id) {
+      if (!event_id || !user_id) {
         res.status(400).json({ error: "Обязательные поля: event_id и user_id" });
       }
 
