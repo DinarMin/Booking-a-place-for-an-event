@@ -17,8 +17,9 @@ export class EventController {
       }
 
       const event = await eventService.createEvent(name, total_seats);
+      res.status(200).json({message: `Ивент: ${name} успешно создан`})
     } catch (error) {
-      res.status(404).json(error);
+      res.status(404).json(error);  
     }
   }
 }
