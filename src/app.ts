@@ -1,6 +1,7 @@
 import express from "express";
 import bookingRoutes from "./routes/bookingRoutes";
 import eventRoutes from "./routes/eventRoutes";
+import getTablesRoutes from "./routes/getTablesRoutes";
 import { initDB } from "./db/postgres";
 
 const app = express();
@@ -14,3 +15,5 @@ app.use(express.json());
 
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/events", eventRoutes);
+app.use("/api/get", getTablesRoutes);
+

@@ -5,6 +5,10 @@ export class EventService {
   }
   /* Создание ивента (имя ивента и количество посадочных мест) */
   async createEvent(name: string, total_seats: string) {
-    const result = await this.eventRepo.createEvent(name, total_seats);
+    try {
+      const result = await this.eventRepo.createEvent(name, total_seats);
+    } catch (error) {
+      throw error;
+    }
   }
 }
