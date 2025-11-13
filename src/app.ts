@@ -8,7 +8,7 @@ const app = express();
 
 app.listen(3000, async () => {
   await initDB();
-  console.log(" Сервер запущен http://localhost:3000");
+  console.log(" Сервер запущен ");
 });
 
 app.use(express.json());
