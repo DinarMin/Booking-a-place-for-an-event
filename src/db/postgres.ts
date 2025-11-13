@@ -1,17 +1,17 @@
 import pg from "pg";
 import { readFile } from "fs/promises";
-import { fileURLToPath } from "url";
 import path from "path";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const { Pool } = pg;
-
-const pool = new Pool({
-  user: "postgres",
+/*   user: "postgres",
   host: "localhost",
   database: "mytestdb",
   password: "dinar2202",
-  port: 5432,
-});
+  port: 5432, */
+const pool = new Pool();
 
 export async function initDB() {
   const __dirname = path.dirname(__filename);
@@ -20,7 +20,8 @@ export async function initDB() {
   try {
     const sqlDB = await readFile(sql, "utf-8");
     await pool.query(sqlDB);
-    console.log("Таблицы events, booking успешно добавлены в базу данных"); 3 
+    console.log("Таблицы events, booking успешно добавлены в базу данных");
+    3;
   } catch (error) {
     console.error(
       "Произошла ошибка, таблицы events, booking не добавлены в базу данных.",
