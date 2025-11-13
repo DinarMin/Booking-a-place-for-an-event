@@ -6,12 +6,13 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const { Pool } = pg;
-/*   user: "postgres",
-  host: "localhost",
-  database: "mytestdb",
-  password: "dinar2202",
-  port: 5432, */
-const pool = new Pool();
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 
 export async function initDB() {
   const __dirname = path.dirname(__filename);
