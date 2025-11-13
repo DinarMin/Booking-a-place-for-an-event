@@ -1,9 +1,14 @@
 import express from "express";
 import bookingRoutes from "./routes/bookingRoutes";
+import eventRoutes from "./routes/eventRoutes";
+import { initDB } from "./db/postgres";
 
 const app = express();
 
-app.listen(3000, () => console.log(" Сервер запущен http://localhost:3000"))
+app.listen(3000, async () => {
+  await initDB();
+  console.log(" Сервер запущен http://localhost:3000");
+});
 
 app.use(express.json());
 
